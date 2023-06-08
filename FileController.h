@@ -312,7 +312,7 @@ public:
     static void getSalaryByFile(const string &name, const string &filename) {
         std::ifstream infile(filename);
         //ios_base::trunc 是指如果文件已经存在，则先删除源文件，然后重新创建一个空文件，以便进行下一步的写入操作
-        std::ofstream outfile("salary.data", ios_base::trunc);
+        std::ofstream outfile(R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\salary.data)", ios_base::trunc);
 
         if (!infile.is_open() || !outfile.is_open()) {
             std::cout << "Error opening file: " << filename << std::endl;
@@ -332,7 +332,8 @@ public:
             // 判断是否为查找的行
             if (!tokens.empty() && tokens[0] == name) {
                 //将不是要删除的行复制到临时文件
-                outfile << tokens[0].c_str() << ","<<tokens[4].c_str() << endl;
+                outfile << "name:" << tokens[0].c_str() << ", salary:" << tokens[4].c_str() << endl;
+                cout << "success" << endl;
                 break;
             }
         }
