@@ -1,4 +1,4 @@
-# Install script for directory: D:/C or C++/C++/Employees/Employees-management-system
+# Install script for directory: D:/C or C++/C++/Employees/Employees-management-system/C--simple-homework
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "D:/C or C++/C++/Employees/Employees-management-system/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "D:/C or C++/C++/Employees/Employees-management-system/C--simple-homework/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

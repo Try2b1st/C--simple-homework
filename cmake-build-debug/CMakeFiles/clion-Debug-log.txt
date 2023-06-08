@@ -1,1 +1,4 @@
-在 D:\C or C++\C++\Employees\Employees-management-system 中找不到 CMakeLists.txt 选择 CMakeLists.txt
+D:\wgz-java\apps\CLion\ch-0\223.8836.42\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=D:/wgz-java/apps/CLion/ch-0/223.8836.42/bin/ninja/win/x64/ninja.exe -G Ninja -S "D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework" -B "D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\cmake-build-debug"
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/C or C++/C++/Employees/Employees-management-system/C--simple-homework/cmake-build-debug

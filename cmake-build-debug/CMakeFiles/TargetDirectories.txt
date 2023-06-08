@@ -1,3 +1,3 @@
-D:/C or C++/C++/Employees/Employees-management-system/cmake-build-debug/CMakeFiles/untitled.dir
-D:/C or C++/C++/Employees/Employees-management-system/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/C or C++/C++/Employees/Employees-management-system/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/C or C++/C++/Employees/Employees-management-system/C--simple-homework/cmake-build-debug/CMakeFiles/untitled.dir
+D:/C or C++/C++/Employees/Employees-management-system/C--simple-homework/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/C or C++/C++/Employees/Employees-management-system/C--simple-homework/cmake-build-debug/CMakeFiles/rebuild_cache.dir

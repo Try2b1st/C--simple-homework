@@ -36,12 +36,16 @@ int main() {
     //    std::cout << "------" << std::endl;
     //}
 
-//    根据员工职位查询员工 --测试
-    vector<CEmployee> cEmployees = FileController::searchByTypeFromFile("CMgr",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-    for(CEmployee &cEmployee: cEmployees){
-        cEmployee.printData();
-        cout << "==========" <<endl;
-    }
+    //根据员工职位查询员工 --测试
+    //vector<CEmployee> cEmployees = FileController::searchByTypeFromFile("CMgr",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
+    //for(CEmployee &cEmployee: cEmployees){
+    //    cEmployee.printData();
+    //    cout << "==========" <<endl;
+    //}
+
+    //按名字输出薪资 --测试
+    FileController::getSalaryByFile("wz",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
+
 
     return 0;
 }
