@@ -305,66 +305,110 @@ public:
     }
 
     /**
-     * 按名字输出薪资
+     * 输出薪资文件
      *
      * @param name 名字
      * @param filename 文件名
      */
     static void getSalaryByFile(const string &type, const string &filename) {
-        vector<CEmployee> employees;
-        std::ifstream infile(filename);
         //ios_base::trunc 是指如果文件已经存在，则先删除源文件，然后重新创建一个空文件，以便进行下一步的写入操作
-        std::ofstream outfile(R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\salary.data)", ios_base::trunc);
+        std::ofstream outfile(R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\salary.data)",
+                              ios_base::trunc);
 
-        if (!infile.is_open() || !outfile.is_open()) {
+        if (!outfile.is_open()) {
             std::cout << "Error opening file: " << filename << std::endl;
             return;
         }
 
         std::string line;
-        while (std::getline(infile, line)) {
-            istringstream iss(line);
-            vector<std::string> tokens;
-            string token;
-            while (getline(iss, token, ',')) {
-                tokens.push_back(token);
-            }
+        string arr[] = {"CMgr", "CManager", "CWage", "CSales"};
+        if (type == "post") {
+            //按“雇员类型”排序输出
+            vector<CEmployee> employees;
+            for (const auto &i: arr) {
+                ifstream infile(filename);
+                if (!infile.is_open()) {
+                    cout << "Error opening file: " << filename << endl;
+                    return;
+                }
+                while (getline(infile, line)) {
+                    istringstream iss(line);
+                    vector<std::string> tokens;
+                    string token;
+                    while (getline(iss, token, ',')) {
+                        tokens.push_back(token);
+                    }
 
-            // 判断是否为查找的行
-            if (!tokens.empty() && tokens[2] == type && tokens.size() == 5) {
-                BDay birthday = BDay(0, 0, 0);
-                std::stringstream ss(tokens[3]);
-                ss >> birthday.year;
-                ss.ignore();
-                ss >> birthday.month;
-                ss.ignore();
-                ss >> birthday.day;
-                employees.emplace_back(tokens[0].c_str(), tokens[1].c_str(), tokens[2].c_str(), birthday,
-                                       stod(tokens[4]));
-            }
-        }
-        //增加堆排序算法
-        // 将容器转换为最大堆
-        make_heap(employees.begin(), employees.end(), heapSortBySalary());
+                    // 判断是否为查找的行 类型：post雇员类型 name名字
+                    if (!tokens.empty() && tokens.size() == 5 && tokens[2] == i) {
+                        BDay birthday = BDay(0, 0, 0);
+                        stringstream ss(tokens[3]);
+                        ss >> birthday.year;
+                        ss.ignore();
+                        ss >> birthday.month;
+                        ss.ignore();
+                        ss >> birthday.day;
+                        employees.emplace_back(tokens[0].c_str(), tokens[1].c_str(), tokens[2].c_str(), birthday,
+                                               stod(tokens[4]));
+                    }
+                }
 
-        // 依次将堆顶元素移到最后一个位置，并从容器中删除
-        while (!employees.empty()) {
-            std::pop_heap(employees.begin(), employees.end(), heapSortBySalary()); // 执行对堆的操作
-            // 获取堆顶元素
-            CEmployee emp = employees.back();
-            outfile<<"name: "<<emp.getName()<<" "<<"Salary: "<<emp.getTotalSalary()<<endl;
-            // 删除堆顶元素
-            employees.pop_back();
+                outfile << "post is " << i << ":" << endl;
+                // 依次将堆顶元素移到最后一个位置，并从容器中删除
+                for (CEmployee emp: employees) {
+                    outfile << "Name: " << emp.getName()
+                            << "; Sex: " << emp.getSex()
+                            << "; Salary: " << emp.getTotalSalary() << endl;
+                }
+                employees.clear();
+                infile.close();
+            }
+        } else if (type == "name") {
+            //选择是按“姓名”排序输出
+            vector<CEmployee> employees = readEmployeesFromFile(filename);
+
+            // 按名称排序
+            sort(employees.begin(), employees.end(), simpleSortByName());
+            for (CEmployee emp: employees) {
+                outfile << "Name: " << emp.getName()
+                        << "; Sex: " << emp.getSex()
+                        << "; Kind: " << emp.getKind()
+                        << "; Salary: " << emp.getTotalSalary() << endl;
+            }
+        } else if (type == "salary") {
+            //按“薪水”排序输出
+            vector<CEmployee> employees = readEmployeesFromFile(filename);
+            //增加堆排序算法
+            // 将容器转换为最大堆
+            make_heap(employees.begin(), employees.end(), heapSortBySalary());
+
+            // 依次将堆顶元素移到最后一个位置，并从容器中删除
+            while (!employees.empty()) {
+                pop_heap(employees.begin(), employees.end(), heapSortBySalary()); // 执行对堆的操作
+                // 获取堆顶元素
+                CEmployee emp = employees.back();
+                outfile << "name: " << emp.getName() << "; Salary: "
+                        << emp.getTotalSalary() << endl;
+                // 删除堆顶元素
+                employees.pop_back();
+            }
+        } else {
+            return;
         }
-        infile.close();
         outfile.close();
     }
 
     // 按工资由高到低排序的比较函数对象
     struct heapSortBySalary {
-        bool operator() (const CEmployee& emp1, const CEmployee& emp2) {
+        bool operator()(const CEmployee &emp1, const CEmployee &emp2) {
             // 返回 emp1 和 emp2 工资的大小关系
             return emp1.getTotalSalary() < emp2.getTotalSalary();
+        }
+    };
+
+    struct simpleSortByName {
+        bool operator()(CEmployee &emp1, CEmployee &emp2) {
+            return emp1.getName() > emp2.getName();
         }
     };
 };
