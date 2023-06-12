@@ -44,7 +44,7 @@ int main() {
     //}
 
     //按名字输出薪资 --测试
-    FileController::getSalaryByFile("wz",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
+    FileController::getSalaryByFile("CManager",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
 
 
     return 0;

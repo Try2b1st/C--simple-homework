@@ -13,6 +13,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -309,7 +310,8 @@ public:
      * @param name 名字
      * @param filename 文件名
      */
-    static void getSalaryByFile(const string &name, const string &filename) {
+    static void getSalaryByFile(const string &type, const string &filename) {
+        vector<CEmployee> employees;
         std::ifstream infile(filename);
         //ios_base::trunc 是指如果文件已经存在，则先删除源文件，然后重新创建一个空文件，以便进行下一步的写入操作
         std::ofstream outfile(R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\salary.data)", ios_base::trunc);
@@ -324,23 +326,47 @@ public:
             istringstream iss(line);
             vector<std::string> tokens;
             string token;
-
             while (getline(iss, token, ',')) {
                 tokens.push_back(token);
             }
 
             // 判断是否为查找的行
-            if (!tokens.empty() && tokens[0] == name) {
-                //将不是要删除的行复制到临时文件
-                outfile << "name:" << tokens[0].c_str() << ", salary:" << tokens[4].c_str() << endl;
-                cout << "success" << endl;
-                break;
+            if (!tokens.empty() && tokens[2] == type && tokens.size() == 5) {
+                BDay birthday = BDay(0, 0, 0);
+                std::stringstream ss(tokens[3]);
+                ss >> birthday.year;
+                ss.ignore();
+                ss >> birthday.month;
+                ss.ignore();
+                ss >> birthday.day;
+                employees.emplace_back(tokens[0].c_str(), tokens[1].c_str(), tokens[2].c_str(), birthday,
+                                       stod(tokens[4]));
             }
         }
+        //增加堆排序算法
+        // 将容器转换为最大堆
+        make_heap(employees.begin(), employees.end(), heapSortBySalary());
 
+        // 依次将堆顶元素移到最后一个位置，并从容器中删除
+        while (!employees.empty()) {
+            std::pop_heap(employees.begin(), employees.end(), heapSortBySalary()); // 执行对堆的操作
+            // 获取堆顶元素
+            CEmployee emp = employees.back();
+            outfile<<"name: "<<emp.getName()<<" "<<"Salary: "<<emp.getTotalSalary()<<endl;
+            // 删除堆顶元素
+            employees.pop_back();
+        }
         infile.close();
         outfile.close();
     }
+
+    // 按工资由高到低排序的比较函数对象
+    struct heapSortBySalary {
+        bool operator() (const CEmployee& emp1, const CEmployee& emp2) {
+            // 返回 emp1 和 emp2 工资的大小关系
+            return emp1.getTotalSalary() < emp2.getTotalSalary();
+        }
+    };
 };
 
 #endif //UNTITLED_FILECONTROLLER_H
