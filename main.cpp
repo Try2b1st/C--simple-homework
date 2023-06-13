@@ -6,46 +6,64 @@
 #include "CSales.h"
 #include "CWage.h"
 #include "FileController.h"
+#include "UserController.h"
 
 using namespace std;
 
 int main() {
-    //å†™å…¥åŠŸèƒ½--æµ‹è¯•
+    //Ğ´Èë¹¦ÄÜ--²âÊÔ
     //CEmployee cEmployee("wgz","Men","CMgr",BDay(2004,12,05),9000.0);
     //vector<CEmployee> cEmployees;
     //cEmployees.push_back(cEmployee);
     //FileController::writeEmployeeToFile(cEmployees,R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
 
-    //æŒ‰åå­—åˆ é™¤--æµ‹è¯•
+    //°´Ãû×ÖÉ¾³ı--²âÊÔ
     //string name = "wgz";
     //CEmployee::deleteEmployeeFromFile(name,R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
 
-    //æŒ‰åå­—ä¿®æ”¹--æµ‹è¯•
+    //°´Ãû×ÖĞŞ¸Ä--²âÊÔ
     //CEmployee cEmployee("wz", "Men", "CMgr", BDay(2004, 12, 05), 6000.0);
     //CEmployee::UpdateEmployeeFromFile("wgz", cEmployee, R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
 
-    //æŒ‰åå­—æŸ¥è¯¢ï¼Œè¿”å›æŸ¥è¯¢åˆ°çš„å‘˜å·¥ä¿¡æ¯ --æµ‹è¯•
+    //°´Ãû×Ö²éÑ¯£¬·µ»Ø²éÑ¯µ½µÄÔ±¹¤ĞÅÏ¢ --²âÊÔ
     //optional<CEmployee> cEmployee = FileController::searchByNameFormFile("wz", R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
     //cEmployee->printData();
 
 
-    //è¯»æ–‡ä»¶--æµ‹è¯•
+    //¶ÁÎÄ¼ş--²âÊÔ
     //vector<CEmployee> employees = FileController::readEmployeesFromFile(R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
     //for (CEmployee &employee: employees) {
     //    employee.printData();
     //    std::cout << "------" << std::endl;
     //}
 
-    //æ ¹æ®å‘˜å·¥èŒä½æŸ¥è¯¢å‘˜å·¥ --æµ‹è¯•
+    //¸ù¾İÔ±¹¤Ö°Î»²éÑ¯Ô±¹¤ --²âÊÔ
     //vector<CEmployee> cEmployees = FileController::searchByTypeFromFile("CMgr",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
     //for(CEmployee &cEmployee: cEmployees){
     //    cEmployee.printData();
     //    cout << "==========" <<endl;
     //}
 
-    //æŒ‰åå­—è¾“å‡ºè–ªèµ„ --æµ‹è¯•
-    FileController::getSalaryByFile("post",
-                                    R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
+    //°´Ãû×ÖÊä³öĞ½×Ê --²âÊÔ
+    //FileController::getSalaryByFile("post",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
+
+    //ÓÃ»§ÊÇ·ñÎª¹ÜÀíÔ± --²âÊÔ
+    string userName;
+    string password;
+    cout << "ÇëÊäÈëÓÃ»§Ãû£º" << endl;
+    getline(cin, userName);
+    cout << "ÇëÊäÈëÃÜÂë£º" << endl;
+    getline(cin, password);
+
+    cout << "ÄãÊäÈëµÄÓÃ»§ÃûÊÇ£º" << userName << endl;
+    cout << "ÄãÊäÈëµÄÃÜÂëÊÇ£º" << password << endl;
+
+    bool result = UserController::UserIsAdmin(userName, password);
+    if (result) {
+        cout << "ÄãÊÇ±¾ÏµÍ³µÄ¹ÜÀíÔ±" << endl;
+    } else {
+        cout << "Äã²»ÊÇ±¾ÏµÍ³µÄ¹ÜÀíÔ±" << endl;
+    }
 
 
     return 0;
