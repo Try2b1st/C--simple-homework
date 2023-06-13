@@ -54,13 +54,20 @@ int main() {
     getline(cin, userName);
     cout << "请输入密码：" << endl;
     getline(cin, password);
-
     cout << "你输入的用户名是：" << userName << endl;
     cout << "你输入的密码是：" << password << endl;
 
     bool result = UserController::UserIsAdmin(userName, password);
     if (result) {
         cout << "你是本系统的管理员" << endl;
+        cout << "1.将员工数据写入文件." << endl;
+        cout << "2.按名字从文件中删除员工信息." << endl;
+        cout << "3.按名字从文件中修改员工信息" << endl;
+        cout << "4.按名字从文件中查询员工信息" << endl;
+        cout << "5.按职位从文件中查询员工信息" << endl;
+        cout << "5." << endl;
+        cout << "6." << endl;
+
     } else {
         cout << "你不是本系统的管理员" << endl;
     }

@@ -213,50 +213,16 @@ public:
      * @return
      */
     static optional<CEmployee> searchByNameFormFile(const string &name, const string &filename) {
-        std::ifstream infile(filename);
-
-        if (!infile.is_open()) {
-            std::cout << "Error opening file: " << filename << std::endl;
-            //返回空指针  引入的 optional 来表示一个值或者空值
-            return nullopt;
-        }
-
-        std::string line;
-        bool found = false;
-        while (std::getline(infile, line)) {
-            istringstream iss(line);
-            vector<std::string> tokens;
-            string token;
-
-            while (getline(iss, token, ',')) {
-                tokens.push_back(token);
+        vector<CEmployee> temp = readEmployeesFromFile(filename);
+        for(CEmployee tempEmployee : temp){
+            if(tempEmployee.getName() == name){
+                return tempEmployee;
             }
-
-            // 判断是否为要搜索的员工
-            if (!tokens.empty() && tokens[0] == name) {
-                BDay birthday = BDay(0, 0, 0);
-                std::stringstream ss(tokens[3]);
-                ss >> birthday.year;
-                ss.ignore();
-                ss >> birthday.month;
-                ss.ignore();
-                ss >> birthday.day;
-                CEmployee cEmployee(tokens[0].c_str(), tokens[1].c_str(), tokens[2].c_str(), birthday,
-                                    stod(tokens[4]));
-                found = true;
-                cout << "find employee: " << name << endl;
-                return cEmployee;
-            }
-
         }
-
-        infile.close();
 
         //如果没有找到指定员工返回空指针
-        if (!found) {
-            cout << "Could not find employee: " << name << endl;
-            return nullopt;
-        }
+        cout << "Could not find employee: " << name << endl;
+        return nullopt;
     }
 
     /**
@@ -267,40 +233,13 @@ public:
      * @return
      */
     static vector<CEmployee> searchByTypeFromFile(const string &type, const string &filename) {
+        vector<CEmployee> temp = readEmployeesFromFile(filename);
         vector<CEmployee> employees;
-        ifstream infile(filename);
-
-        if (!infile.is_open()) {
-            cout << "Error opening file: " << filename << endl;
-            return employees;
-        }
-
-        string line;
-        while (getline(infile, line)) {
-            istringstream iss(line);
-            vector<string> tokens;
-            string token;
-
-            while (getline(iss, token, ',')) {
-                tokens.push_back(token);
-            }
-
-            if (tokens.size() == 5 && tokens[2] == type) {
-                BDay birthday = BDay(0, 0, 0);
-                std::stringstream ss(tokens[3]);
-                ss >> birthday.year;
-                ss.ignore();
-                ss >> birthday.month;
-                ss.ignore();
-                ss >> birthday.day;
-                employees.emplace_back(tokens[0].c_str(), tokens[1].c_str(), tokens[2].c_str(), birthday,
-                                       stod(tokens[4]));
-            } else {
-                cout << "Invalid line: " << line << endl;
+        for(CEmployee employee : temp){
+            if(employee.getKind() == type){
+                employees.push_back(employee);
             }
         }
-
-        infile.close();
         return employees;
     }
 
