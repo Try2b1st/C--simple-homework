@@ -65,8 +65,7 @@ int main() {
         cout << "3.按名字从文件中修改员工信息" << endl;
         cout << "4.按名字从文件中查询员工信息" << endl;
         cout << "5.按职位从文件中查询员工信息" << endl;
-        cout << "5." << endl;
-        cout << "6." << endl;
+        cout << "6.输出薪资" << endl;
 
     } else {
         cout << "你不是本系统的管理员" << endl;
