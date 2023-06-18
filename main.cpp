@@ -58,14 +58,20 @@ int main() {
     cout << "你输入的密码是：" << password << endl;
 
     bool result = UserController::UserIsAdmin(userName, password);
+    string chooseId = "0";
     if (result) {
-        cout << "你是本系统的管理员" << endl;
-        cout << "1.将员工数据写入文件." << endl;
-        cout << "2.按名字从文件中删除员工信息." << endl;
-        cout << "3.按名字从文件中修改员工信息" << endl;
-        cout << "4.按名字从文件中查询员工信息" << endl;
-        cout << "5.按职位从文件中查询员工信息" << endl;
-        cout << "6.输出薪资" << endl;
+        while(chooseId != "7"){
+            cout << "你是本系统的管理员" << endl;
+            cout << "1.将员工数据写入文件." << endl;
+            cout << "2.按名字从文件中删除员工信息." << endl;
+            cout << "3.按名字从文件中修改员工信息" << endl;
+            cout << "4.按名字从文件中查询员工信息" << endl;
+            cout << "5.按职位从文件中查询员工信息" << endl;
+            cout << "6.输出薪资" << endl;
+            cout << "7.退出系统" << endl;
+            cin>>chooseId;
+        }
+
 
     } else {
         cout << "你不是本系统的管理员" << endl;
