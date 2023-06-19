@@ -24,18 +24,18 @@ struct BDay {
 
 class CEmployee {
 private:
-    char _name[30]{};                //姓名
-    char _sex[10]{};                  //性别
-    char _kind[10]{};                //类型
+    string _name;                //姓名
+    string _sex;                  //性别
+    string _kind;                //类型
     BDay _birthday;                //生日，自定义结构BDay，格式：1990-1-1
     double _totalSalary;           //月薪
 public:
     //构造函数
-    CEmployee(const char *name, const char *sex, const char *kind, BDay birthday, double totalSalary)
+    CEmployee(string name, string sex, string kind, BDay birthday, double totalSalary)
             : _birthday(birthday), _totalSalary(totalSalary) {
-        strncpy(_name, name, sizeof(_name));
-        strncpy(_sex, sex, sizeof(_sex));
-        strncpy(_kind, kind, sizeof(_kind));
+        _name = name;
+        _sex = sex;
+        _kind = kind;
     };
 
     //返回雇员名字
