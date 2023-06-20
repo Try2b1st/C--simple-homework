@@ -1,5 +1,5 @@
 //
-// Created by ÏÂË®µÀµÄÐ¡ÀÏÊó on 2023/6/13.
+// Created by ï¿½ï¿½Ë®ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½ï¿½ï¿½ on 2023/6/13.
 //
 
 #ifndef UNTITLED_USERCONTROLLER_H
@@ -11,11 +11,11 @@ using namespace std;
 
 class UserController {
 public:
-    static bool UserIsAdmin(string userName, string passWord) {
-        //¶¨ÒåÕýÔò±í´ïÊ½
-        regex regEx("[ _`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~£¡@#£¤%¡­¡­&*£¨£©¡ª¡ª+|{}¡¾¡¿¡®£»£º¡±¡°¡¯¡££¬¡¢£¿\n\r\t]");
+    static bool wUserIsAdmin(string userName, string passWord) {
+        //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½
+        regex regEx("[ _`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~ï¿½ï¿½@#ï¿½ï¿½%ï¿½ï¿½ï¿½ï¿½&*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½+|{}ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\n\r\t]");
 
-        //¶ÔÓÃ»§ÃûÊÇ·ñÊÇ°üº¬ÌØÊâ×Ö·û
+        //ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½
         bool result = regex_search(userName, regEx);
         if (result) {
             return false;
