@@ -47,7 +47,7 @@ public:
 
             if (tokens.size() == 5) {
                 BDay birthday = BDay(0, 0, 0);
-                std::stringstream ss(tokens[3]);
+                stringstream ss(tokens[3]);
                 ss >> birthday.year;
                 ss.ignore();
                 ss >> birthday.month;
