@@ -12,41 +12,6 @@
 using namespace std;
 
 int main() {
-    //写入功能--测试
-    //CEmployee cEmployee("wgz","Men","CMgr",BDay(2004,12,05),9000.0);
-    //vector<CEmployee> cEmployees;
-    //cEmployees.push_back(cEmployee);
-    //FileController::writeEmployeeToFile(cEmployees,R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-
-    //按名字删除--测试
-    //string name = "wgz";
-    //CEmployee::deleteEmployeeFromFile(name,R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-
-    //按名字修改--测试
-    //CEmployee cEmployee("wz", "Men", "CMgr", BDay(2004, 12, 05), 6000.0);
-    //CEmployee::UpdateEmployeeFromFile("wgz", cEmployee, R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-
-    //按名字查询，返回查询到的员工信息 --测试
-    //optional<CEmployee> cEmployee = FileController::searchByNameFormFile("wz", R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-    //cEmployee->printData();
-
-
-    //读文件--测试
-    //vector<CEmployee> employees = FileController::readEmployeesFromFile(R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-    //for (CEmployee &employee: employees) {
-    //    employee.printData();
-    //    std::cout << "------" << std::endl;
-    //}
-
-    //根据员工职位查询员工 --测试
-    //vector<CEmployee> cEmployees = FileController::searchByTypeFromFile("CMgr",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
-    //for(CEmployee &cEmployee: cEmployees){
-    //    cEmployee.printData();
-    //    cout << "==========" <<endl;
-    //}
-
-    //按名字输出薪资 --测试
-    //FileController::getSalaryByFile("post",R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
 
     //用户是否为管理员 --测试
     string userName;
@@ -69,7 +34,7 @@ int main() {
 
     if (result) {
         int chooseId = 0;
-        while (chooseId != 7) {
+        while (chooseId != 8) {
             cout << "=============== 你是本系统的管理员 ===============" << endl;
             cout << "1.将员工数据写入文件." << endl;
             cout << "2.按名字从文件中删除员工信息." << endl;
@@ -77,7 +42,8 @@ int main() {
             cout << "4.按名字从文件中查询员工信息" << endl;
             cout << "5.按职位从文件中查询员工信息" << endl;
             cout << "6.输出薪资" << endl;
-            cout << "7.退出系统" << endl;
+            cout << "7.从文件中读取全部员工数据" << endl;
+            cout << "8.退出系统" << endl;
             cout << "请输入你的选择：" << endl;
             cin >> chooseId;
             cin.ignore();
@@ -143,7 +109,7 @@ int main() {
                 cin >> choose;
                 if (choose == "y") {
                     cout << "请输入员工的性别：";
-                    getline(cin, sex);
+                    cin >> sex;
                     choose = "n";
                 }
 
@@ -176,7 +142,7 @@ int main() {
                     choose = "n";
                 }
 
-                FileController::UpdateEmployeeFromFile("wgz", cEmployee1,
+                FileController::UpdateEmployeeFromFile(name, cEmployee1,
                                                        R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
             } else if (chooseId == 4) {
                 cout << "请输入员工的姓名：";
@@ -190,8 +156,8 @@ int main() {
                 cout << "2.CMgr" << endl;
                 cout << "3.CWage" << endl;
                 cout << "4.CSales" << endl;
-                cout << "选择员工职位：" << endl;
-                getline(cin,type);
+                cout << "选择员工职位(不要输入数字)：" << endl;
+                getline(cin, type);
                 vector<CEmployee> cEmployees1 = FileController::searchByTypeFromFile(type,
                                                                                      R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
                 for (CEmployee &cEmployee3: cEmployees1) {
@@ -201,12 +167,18 @@ int main() {
                 string type;
                 cout << "1.kind：" << endl;
                 cout << "2.name" << endl;
-                cout << "3.money" << endl;
-                cout << "选择输出类型：" << endl;
-                getline(cin,type);
+                cout << "3.salary" << endl;
+                cout << "选择输出类型(不要输入数字)：" << endl;
+                getline(cin, type);
                 FileController::getSalaryByFile(type,
                                                 R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
                 cout << "输出到了salary.data文件中" << endl;
+            } else if (chooseId == 7) {
+                vector<CEmployee> cEmployees = FileController::readEmployeesFromFile(
+                        R"(D:\C or C++\C++\Employees\Employees-management-system\C--simple-homework\employee.data)");
+                for (CEmployee cEmployee: cEmployees) {
+                    cEmployee.printData();
+                }
             } else {
                 cout << "没有这个选项！" << endl;
             }

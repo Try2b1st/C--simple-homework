@@ -11,7 +11,7 @@ using namespace std;
 
 class UserController {
 public:
-    static bool wUserIsAdmin(string userName, string passWord) {
+    static bool UserIsAdmin(string userName, string passWord) {
         //����������ʽ
         regex regEx("[ _`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~��@#��%����&*��������+|{}������������������������\n\r\t]");
 

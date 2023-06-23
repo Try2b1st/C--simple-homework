@@ -32,10 +32,6 @@ public:
         CManager::setTotalSalary(fixedSalary + salesPercent);
     }
 
-    void printData() {
-
-    }
-
     ~ CMgr() override = default;
 };
 

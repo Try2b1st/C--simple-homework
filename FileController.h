@@ -28,6 +28,7 @@ public:
      */
     static vector<CEmployee> readEmployeesFromFile(const string &filename) {
         vector<CEmployee> employees;
+        //打开文件
         ifstream infile(filename);
 
         if (!infile.is_open()) {
@@ -35,12 +36,14 @@ public:
             return employees;
         }
 
+        //读取文件中的每一行
         string line;
         while (getline(infile, line)) {
             istringstream iss(line);
             vector<string> tokens;
             string token;
 
+            //每一行以逗号分隔符读取
             while (getline(iss, token, ',')) {
                 tokens.push_back(token);
             }
@@ -53,6 +56,7 @@ public:
                 ss >> birthday.month;
                 ss.ignore();
                 ss >> birthday.day;
+                //读取的数据放到集合中
                 employees.emplace_back(tokens[0].c_str(), tokens[1].c_str(), tokens[2].c_str(), birthday,
                                        stod(tokens[4]));
             } else {
@@ -61,6 +65,7 @@ public:
         }
 
         infile.close();
+        //返回集合
         return employees;
     }
 
@@ -183,7 +188,6 @@ public:
                 //跳过这次循环，不仔将此行输出到临时文件中
                 continue;
             }
-
             //将不是要修改的行复制到临时文件
             outfile << line << endl;
         }
@@ -261,7 +265,7 @@ public:
 
         std::string line;
         string arr[] = {"CMgr", "CManager", "CWage", "CSales"};
-        if (type == "post") {
+        if (type == "kind") {
             //按“雇员类型”排序输出
             vector<CEmployee> employees;
             for (const auto &i: arr) {
@@ -345,6 +349,7 @@ public:
         }
     };
 
+    //按名字排序
     struct simpleSortByName {
         bool operator()(CEmployee &emp1, CEmployee &emp2) {
             return emp1.getName() > emp2.getName();
