@@ -2,10 +2,7 @@
 #include <string>
 
 #include "CEmployee.h"
-#include "CManager.h"
-#include "CMgr.h"
-#include "CSales.h"
-#include "CWage.h"
+
 #include "FileController.h"
 #include "UserController.h"
 
