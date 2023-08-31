@@ -13,7 +13,7 @@ int main() {
     //用户是否为管理员 --测试
     string userName;
     string password;
-    cout << "请输入用户名：" << endl;
+    cout << "请输入用户名:" << endl;
     getline(cin, userName);
     cout << "请输入密码：" << endl;
     getline(cin, password);
