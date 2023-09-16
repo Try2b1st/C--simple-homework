@@ -15,10 +15,10 @@ int main() {
     string password;
     cout << "请输入用户名:" << endl;
     getline(cin, userName);
-    cout << "请输入密码：" << endl;
+    cout << "请输入密码:" << endl;
     getline(cin, password);
-    cout << "你输入的用户名是：" << userName << endl;
-    cout << "你输入的密码是：" << password << endl;
+    cout << "你输入的用户名是:" << userName << endl;
+    cout << "你输入的密码是:" << password << endl;
 
     bool result = UserController::UserIsAdmin(userName, password);
 
